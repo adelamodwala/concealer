@@ -1,6 +1,7 @@
 packages/
+node_modules/
 web/node_modules/
 .atom/
 .pub/
-
+.idea/
 public/.sass-cache/
