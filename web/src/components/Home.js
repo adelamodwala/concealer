@@ -20,8 +20,6 @@ class Home extends Component {
         let encodedValue = this.props.encodedValue ? this.props.encodedValue : '';
         return (
             <div>
-                <h1>Concealer - For Your Strings</h1>
-
                 <div>
                     <TextField
                         ref="encodeText"
