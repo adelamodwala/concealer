@@ -2,3 +2,14 @@ body {
   margin: 0;
   padding: 0;
 }
+
+@import 'Home';
+
+.section-container {
+  padding: 40px 0;
+}
+
+.content-box {
+  max-width: 900px;
+  margin: 0 auto;
+}

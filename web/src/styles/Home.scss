@@ -1,0 +1,9 @@
+.home-container {
+  background: rgb(245,245,245);
+
+  .content-box {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+  }
+}

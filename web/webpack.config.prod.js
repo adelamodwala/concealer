@@ -26,6 +26,9 @@ module.exports = {
   ],
   module: {
     loaders: [{
+      test: /\.scss$/,
+      loaders: ["style", "css", "sass"]
+    }, {
       test: /\.js$/,
       loaders: ['babel'],
       include: path.join(__dirname, 'src')
