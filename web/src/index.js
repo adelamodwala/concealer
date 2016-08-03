@@ -6,6 +6,7 @@ import {App} from './components/App';
 import Home from './components/Home';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+require("./styles/style.scss");
 
 const store = configureStore();
 injectTapEventPlugin();
