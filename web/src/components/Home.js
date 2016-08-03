@@ -32,13 +32,10 @@ class Home extends Component {
                             ref="encodeText"
                             floatingLabelText="Enter text to encode..."
                             multiLine={true}
-                            rows={2}
-                            rowsMax={5}/>
-
-
+                            fullWidth={true}/>
                     </div>
-                    <RaisedButton label="Encode" onClick={() => this.onEncodeClick()}/>
-                    <div style={{wordBreak: 'break-all', width: 300}}>
+                    <RaisedButton label="Encode" primary={true} onClick={() => this.onEncodeClick()}/>
+                    <div style={{wordBreak: 'break-all', marginTop: 10}}>
                         {encodedValue}
                     </div>
                     <SnailLoader isLoading={this.props.isFetchingEncodeResult}/>

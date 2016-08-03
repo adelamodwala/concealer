@@ -2,6 +2,8 @@
   background: rgb(245,245,245);
 
   .content-box {
+    width: 500px;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     flex-flow: column;
