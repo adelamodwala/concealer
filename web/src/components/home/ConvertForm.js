@@ -21,8 +21,8 @@ export default class ConvertForm extends Component {
                     <TextField
                         ref={this.props.convertType + "Text"}
                         floatingLabelText={"Enter text to " + this.props.convertType + "..."}
-                        floatingLabelFocusStyle={{color: styleVariables.colors.plcHldr}}
-                        underlineFocusStyle={{borderColor: styleVariables.colors.plcHldr}}
+                        floatingLabelFocusStyle={{color: styleVariables.colors.floater}}
+                        underlineFocusStyle={{borderColor: styleVariables.colors.floater}}
                         textareaStyle={this.props.textareaStyle}
                         multiLine={true}
                         fullWidth={true}/>
