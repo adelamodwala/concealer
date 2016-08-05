@@ -46,8 +46,5 @@ export function postFetch(opts) {
         postOpts.body = sanitizedOpts.optBody;
     }
 
-    return fetch(apiAddress + opts.endpoint, postOpts)
-        .then((response) => {
-            return response.json();
-        });
+    return fetch(apiAddress + opts.endpoint, postOpts);
 }

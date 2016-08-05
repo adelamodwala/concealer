@@ -42,17 +42,12 @@ export default function encodeReducer(state = initialState, action) {
                 isFetchingDecodeResult: true
             }
 
+        case DECODE_INPUT_REQUEST_FAILURE:
         case DECODE_INPUT_REQUEST_SUCCESS:
             return {
                 ...state,
                 isFetchingDecodeResult: false,
                 decodedValue: action.decodedValue
-            }
-
-        case DECODE_INPUT_REQUEST_FAILURE:
-            return {
-                ...state,
-                isFetchingDecodeResult: false
             }
 
         default:

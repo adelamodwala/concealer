@@ -47,6 +47,16 @@ function sendEncodeInputRequest(rawText) {
         };
         
         return postFetch(opts)
+            .then((response) => {
+                let json;
+                if(response.ok) {
+                    json = response.json();
+                }
+                else {
+                    json = {"error": "Please enter a valid encoded value"}
+                }
+                return json;
+            })
             .then((json) => {
                 if(typeof json == "string") {
                     dispatch(encodeInputRequestSuccess(json));
@@ -74,9 +84,10 @@ export function decodeInputRequestSuccess(decodedValue) {
     }
 }
 
-export function decodeInputRequestFailure() {
+export function decodeInputRequestFailure(decodedValue) {
     return {
-        type: DECODE_INPUT_REQUEST_FAILURE
+        type: DECODE_INPUT_REQUEST_FAILURE,
+        decodedValue
     }
 }
 
@@ -95,13 +106,22 @@ function sendDecodeInputRequest(rawText) {
         };
 
         return postFetch(opts)
+            .then((response) => {
+                let json;
+                if(response.ok) {
+                    json = response.json();
+                }
+                else {
+                    json = {"error": "Please enter a valid encoded value"}
+                }
+                return json;
+            })
             .then((json) => {
-                debugger;
                 if(typeof json == "string") {
                     dispatch(decodeInputRequestSuccess(json));
                 }
                 else {
-                    dispatch(decodeInputRequestFailure());
+                    dispatch(decodeInputRequestFailure(json.error));
                 }
             })
     }
