@@ -1,7 +1,3 @@
-# React CMS Frontend
+# Concleaer ;)
 
-In development - a React/Redux front-end to be used with a CMS backend (for now just Wordpress).
-
-Credit: This repo is using the [@gaearon](https://github.com/gaearon) boilerplate at https://github.com/gaearon/react-transform-boilerplate - it's freaking awesome!
-
-Stay tuned for more updates!
+Concealer is an extendible tool for all sorts of obfuscations and token generations - built purely in JavaScript using Express, React (using the material-ui components), and SASS.
