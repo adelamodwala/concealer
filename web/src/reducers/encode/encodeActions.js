@@ -3,9 +3,16 @@ import {postFetch} from '../../lib/api';
 const {
     ENCODE_INPUT_REQUEST,
     ENCODE_INPUT_REQUEST_SUCCESS,
-    ENCODE_INPUT_REQUEST_FAILURE
+    ENCODE_INPUT_REQUEST_FAILURE,
+
+    DECODE_INPUT_REQUEST,
+    DECODE_INPUT_REQUEST_SUCCESS,
+    DECODE_INPUT_REQUEST_FAILURE
 } = require('../../lib/constants').default;
 
+/**
+ * Encode
+ */
 export function encodeInputRequest() {
     return {
         type: ENCODE_INPUT_REQUEST
@@ -46,6 +53,55 @@ function sendEncodeInputRequest(rawText) {
                 }
                 else {
                     dispatch(encodeInputRequestFailure());
+                }
+            })
+    }
+}
+
+/**
+ * Decode
+ */
+export function decodeInputRequest() {
+    return {
+        type: DECODE_INPUT_REQUEST
+    }
+}
+
+export function decodeInputRequestSuccess(decodedValue) {
+    return {
+        type: DECODE_INPUT_REQUEST_SUCCESS,
+        decodedValue
+    }
+}
+
+export function decodeInputRequestFailure() {
+    return {
+        type: DECODE_INPUT_REQUEST_FAILURE
+    }
+}
+
+export function decodeInput(rawText) {
+    return (dispatch, getState) => {
+        dispatch(decodeInputRequest());
+        return sendDecodeInputRequest(rawText);
+    }
+}
+
+function sendDecodeInputRequest(rawText) {
+    return (dispatch) => {
+        let opts = {
+            endpoint: '/decodeBase64',
+            body: JSON.stringify({text: rawText})
+        };
+
+        return postFetch(opts)
+            .then((json) => {
+                debugger;
+                if(typeof json == "string") {
+                    dispatch(decodeInputRequestSuccess(json));
+                }
+                else {
+                    dispatch(decodeInputRequestFailure());
                 }
             })
     }

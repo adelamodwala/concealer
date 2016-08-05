@@ -19,14 +19,14 @@ module.exports = {
         new webpack.NoErrorsPlugin()
     ],
     module: {
-        loaders: [{test: /\.json$/, loader: 'json'}, {
+        loaders: [{
             test: /\.scss$/,
             loaders: ["style", "css", "sass"]
         }, {
             test: /\.jsx?/,
             loaders: ['babel'],
             include: path.join(__dirname, 'src')
-        }]
+        }, {test: /\.json$/, loader: 'json'}]
     },
     sassLoader: {
         // Apply the JSON importer via sass-loader's options.

@@ -1,5 +1,7 @@
 {
   "colors": {
-    "red": "#c33"
+    "primaryBg": "#2978A0",
+    "primaryBgText": "#F5F5F5",
+    "alternateBg": "#40BCD8"
   }
 }

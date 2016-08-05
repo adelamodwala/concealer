@@ -13,4 +13,10 @@ router.post('/encodeBase64', (req, res) => {
   res.send(JSON.stringify(encoded));
 });
 
+router.post('/decodeBase64', (req, res) => {
+  let wordArray = CryptoJS.enc.Base64.parse(req.body.text);
+  let decoded = CryptoJS.enc.Utf8.stringify(wordArray);
+  res.send(JSON.stringify(decoded));
+});
+
 module.exports = router;

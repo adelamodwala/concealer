@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
+import styleVariables from '../lib/styleVariables.json';
 
 export class App extends Component {
     render() {
@@ -10,7 +11,7 @@ export class App extends Component {
                 <MuiThemeProvider>
                     <div>
                         <AppBar title="Concealer ;)" iconClassNameRight="muidocs-icon-navigation-expand-more"
-                                className="primary"/>
+                                style={{backgroundColor: styleVariables.colors.primaryBg, color: styleVariables.colors.primaryBgText}}/>
                         <div className="app-components">
                             {this.props.children}
                         </div>

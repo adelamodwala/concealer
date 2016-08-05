@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux'
 import {Router, Route, IndexRoute, hashHistory} from 'react-router'
 import {App} from './components/App';
-import Home from './components/Home';
+import Home from './components/home/Home';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 require("./styles/style.scss");
