@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var jsonImporter = require('node-sass-json-importer');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
@@ -18,7 +19,7 @@ module.exports = {
         new webpack.NoErrorsPlugin()
     ],
     module: {
-        loaders: [{
+        loaders: [{test: /\.json$/, loader: 'json'}, {
             test: /\.scss$/,
             loaders: ["style", "css", "sass"]
         }, {
@@ -26,5 +27,9 @@ module.exports = {
             loaders: ['babel'],
             include: path.join(__dirname, 'src')
         }]
+    },
+    sassLoader: {
+        // Apply the JSON importer via sass-loader's options.
+        importer: jsonImporter
     }
 };

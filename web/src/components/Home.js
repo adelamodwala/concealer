@@ -6,12 +6,12 @@ import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
 import * as encodeActions from '../reducers/encode/encodeActions';
 import SnailLoader from './common/SnailLoader';
+import styleVariables from '../lib/styleVariables.json';
 
 class Home extends Component {
 
     onEncodeClick() {
         let rawText = this.refs.encodeText.getValue();
-        console.log(rawText);
         let {dispatch, actions} = this.props;
         dispatch(actions.encodeInput(rawText));
 
@@ -34,7 +34,8 @@ class Home extends Component {
                             multiLine={true}
                             fullWidth={true}/>
                     </div>
-                    <RaisedButton label="Encode" primary={true} onClick={() => this.onEncodeClick()}/>
+                    <RaisedButton label="Encode" onClick={() => this.onEncodeClick()}
+                                  className="primary"/>
                     <div style={{wordBreak: 'break-all', marginTop: 10}}>
                         {encodedValue}
                     </div>

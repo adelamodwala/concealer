@@ -3,6 +3,8 @@ body {
   padding: 0;
 }
 
+@import 'Variables';
+@import 'App';
 @import 'Home';
 
 .section-container {

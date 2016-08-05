@@ -9,7 +9,8 @@ export class App extends Component {
             <div>
                 <MuiThemeProvider>
                     <div>
-                        <AppBar title="Concealer ;)" iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+                        <AppBar title="Concealer ;)" iconClassNameRight="muidocs-icon-navigation-expand-more"
+                                className="primary"/>
                         <div className="app-components">
                             {this.props.children}
                         </div>
