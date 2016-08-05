@@ -21,17 +21,24 @@ export default class ConvertForm extends Component {
                     <TextField
                         ref={this.props.convertType + "Text"}
                         floatingLabelText={"Enter text to " + this.props.convertType + "..."}
+                        floatingLabelFocusStyle={{color: styleVariables.colors.plcHldr}}
+                        underlineFocusStyle={{borderColor: styleVariables.colors.plcHldr}}
+                        textareaStyle={this.props.textareaStyle}
                         multiLine={true}
                         fullWidth={true}/>
                 </div>
-                <RaisedButton label={capitalizeFirstLetter(this.props.convertType)}
-                              onClick={() => this.onConvertClick()}
-                              backgroundColor={styleVariables.colors.primaryBg}
-                              labelColor={styleVariables.colors.primaryBgText}/>
-                <div style={{wordBreak: 'break-all', marginTop: 10}}>
+                <div style={{position: 'relative'}}>
+                    <RaisedButton fullWidth={true} label={capitalizeFirstLetter(this.props.convertType)}
+                                  onClick={() => this.onConvertClick()}
+                                  backgroundColor={this.props.buttonBackgroundColor}
+                                  labelColor={this.props.buttonLabelColor}/>
+                    <div style={{position: 'absolute', top: -7, right: 0}}>
+                        <SnailLoader isLoading={this.props.isFetchingConvertResult}/>
+                    </div>
+                </div>
+                <div style={{wordBreak: 'break-all', marginTop: 10, ...this.props.resultStyle}}>
                     {convertedValue}
                 </div>
-                <SnailLoader isLoading={this.props.isFetchingConvertResult}/>
             </div>
         );
     }

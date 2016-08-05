@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
 import * as encodeActions from '../../reducers/encode/encodeActions';
 import ConvertForm from './ConvertForm';
+import styleVariables from '../../lib/styleVariables.json';
 
 class Home extends Component {
 
@@ -24,15 +25,27 @@ class Home extends Component {
         });
 
         return (
-            <div className={homeClass}>
-                <ConvertForm convertType="encode"
-                             convertedValue={this.props.encodedValue}
-                             isFetchingConvertResult={this.props.isFetchingEncodeResult}
-                             onConvertClick={(rawText) => this.onEncodeClick(rawText)}/>
-                <ConvertForm convertType="decode"
-                             convertedValue={this.props.decodedValue}
-                             isFetchingConvertResult={this.props.isFetchingDecodeResult}
-                             onConvertClick={(rawText) => this.onDecodeClick(rawText)}/>
+            <div>
+                <div className={homeClass}>
+                    <ConvertForm convertType="encode"
+                                 convertedValue={this.props.encodedValue}
+                                 isFetchingConvertResult={this.props.isFetchingEncodeResult}
+                                 onConvertClick={(rawText) => this.onEncodeClick(rawText)}
+                                 buttonBackgroundColor={styleVariables.colors.themeBg}
+                                 buttonLabelColor={styleVariables.colors.primaryBgText}
+                                 textareaStyle={{color: 'black'}}
+                                 resultStyle={{color: styleVariables.colors.secondaryBgText}}/>
+                </div>
+                <div className={homeClass} style={{backgroundColor: styleVariables.colors.themeBg}}>
+                    <ConvertForm convertType="decode"
+                                 convertedValue={this.props.decodedValue}
+                                 isFetchingConvertResult={this.props.isFetchingDecodeResult}
+                                 onConvertClick={(rawText) => this.onDecodeClick(rawText)}
+                                 buttonBackgroundColor={styleVariables.colors.secondaryBgBtn}
+                                 buttonLabelColor={styleVariables.colors.secondaryBgText}
+                                 textareaStyle={{color: styleVariables.colors.primaryBgText}}
+                                 resultStyle={{color: styleVariables.colors.primaryBgText}}/>
+                </div>
             </div>
         );
     }

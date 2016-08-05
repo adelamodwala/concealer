@@ -1,4 +1,4 @@
 @import '../lib/styleVariables.json';
 
-$primaryBgColor: map-get($colors, primaryBg);
+$primaryBgColor: map-get($colors, themeBg);
 $primaryBgTextColor: map-get($colors, primaryBgText);

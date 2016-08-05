@@ -1,7 +1,14 @@
 {
   "colors": {
-    "primaryBg": "#2978A0",
+    "themeBg": "#2978A0",
+
+    "primaryBg": "#F5F5F5",
     "primaryBgText": "#F5F5F5",
-    "alternateBg": "#40BCD8"
+    "secondaryBg": "#7C77B9",
+    "secondaryBgBtn": "#F5F5F5",
+    "secondaryBgText": "#0C0C0C",
+    "secondaryBgPlcHldr": "#FFFFFF",
+
+    "plcHldr": "#8FC93A"
   }
 }

@@ -11,7 +11,7 @@ export class App extends Component {
                 <MuiThemeProvider>
                     <div>
                         <AppBar title="Concealer ;)" iconClassNameRight="muidocs-icon-navigation-expand-more"
-                                style={{backgroundColor: styleVariables.colors.primaryBg, color: styleVariables.colors.primaryBgText}}/>
+                                style={{backgroundColor: styleVariables.colors.themeBg, color: styleVariables.colors.primaryBgText}}/>
                         <div className="app-components">
                             {this.props.children}
                         </div>
