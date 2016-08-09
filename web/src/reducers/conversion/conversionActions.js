@@ -38,15 +38,15 @@ export function encodeInputRequestFailure() {
 export function encodeInput(rawText) {
     return (dispatch, getState) => {
         dispatch(encodeInputRequest());
-        return sendEncodeInputRequest(rawText);
+        return sendEncodeInputRequest(rawText, getState().conversion.encodingMethod);
     }
 }
 
-function sendEncodeInputRequest(rawText) {
+function sendEncodeInputRequest(rawText, encodingMethod) {
     return (dispatch) => {
         let opts = {
-            endpoint: '/encodeBase64',
-            body: JSON.stringify({text: rawText})
+            endpoint: '/encodeInput',
+            body: JSON.stringify({text: rawText, method: encodingMethod})
         };
         
         return postFetch(opts)
@@ -97,15 +97,15 @@ export function decodeInputRequestFailure(decodedValue) {
 export function decodeInput(rawText) {
     return (dispatch, getState) => {
         dispatch(decodeInputRequest());
-        return sendDecodeInputRequest(rawText);
+        return sendDecodeInputRequest(rawText, getState().conversion.decodingMethod);
     }
 }
 
-function sendDecodeInputRequest(rawText) {
+function sendDecodeInputRequest(rawText, decodingMethod) {
     return (dispatch) => {
         let opts = {
-            endpoint: '/decodeBase64',
-            body: JSON.stringify({text: rawText})
+            endpoint: '/decodeInput',
+            body: JSON.stringify({text: rawText, method: decodingMethod})
         };
 
         return postFetch(opts)
