@@ -7,8 +7,11 @@ const {
 
     DECODE_INPUT_REQUEST,
     DECODE_INPUT_REQUEST_SUCCESS,
-    DECODE_INPUT_REQUEST_FAILURE
-} = require('../../lib/constants').default;
+    DECODE_INPUT_REQUEST_FAILURE,
+
+    SET_ENCODING_METHOD,
+    SET_DECODING_METHOD
+} = require('../../lib/actionKeys').default;
 
 /**
  * Encode
@@ -124,5 +127,22 @@ function sendDecodeInputRequest(rawText) {
                     dispatch(decodeInputRequestFailure(json.error));
                 }
             })
+    }
+}
+
+/**
+ * Conversion method changes
+ */
+export function setEncodingMethod(encodingMethod) {
+    return {
+        type: SET_ENCODING_METHOD,
+        encodingMethod
+    }
+}
+
+export function setDecodingMethod(decodingMethod) {
+    return {
+        type: SET_DECODING_METHOD,
+        decodingMethod
     }
 }

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {default as encode} from './encode/encodeReducer';
+import {default as conversion} from './conversion/conversionReducer';
 
 /**
  * Export our root reducer
@@ -7,5 +7,5 @@ import {default as encode} from './encode/encodeReducer';
  * @return {Object-Reducer} root reducer
  */
 export default combineReducers({
-	encode
+	conversion
 });

@@ -1,11 +1,6 @@
-import keyMirror from 'key-mirror';
-
-export default keyMirror({
-    ENCODE_INPUT_REQUEST: null,
-    ENCODE_INPUT_REQUEST_SUCCESS: null,
-    ENCODE_INPUT_REQUEST_FAILURE: null,
-
-    DECODE_INPUT_REQUEST: null,
-    DECODE_INPUT_REQUEST_SUCCESS: null,
-    DECODE_INPUT_REQUEST_FAILURE: null
-});
+export const CONVERSION_METHODS = {
+    BASE64: 'Base64',
+    MD5: 'MD5',
+    SHA256: 'SHA256',
+    AES: 'AES'
+};

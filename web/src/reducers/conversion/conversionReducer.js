@@ -1,3 +1,5 @@
+import {CONVERSION_METHODS} from '../../lib/constants';
+
 const {
     ENCODE_INPUT_REQUEST,
     ENCODE_INPUT_REQUEST_SUCCESS,
@@ -5,17 +7,22 @@ const {
 
     DECODE_INPUT_REQUEST,
     DECODE_INPUT_REQUEST_SUCCESS,
-    DECODE_INPUT_REQUEST_FAILURE
-} = require('../../lib/constants').default;
+    DECODE_INPUT_REQUEST_FAILURE,
+
+    SET_ENCODING_METHOD,
+    SET_DECODING_METHOD
+} = require('../../lib/actionKeys').default;
 
 const initialState = {
+    encodingMethod: CONVERSION_METHODS.BASE64,
     isFetchingEncodeResult: false,
     encodedValue: null,
+    decodingMethod: CONVERSION_METHODS.BASE64,
     isFetchingDecodeResult: false,
     decodedValue: null
 };
 
-export default function encodeReducer(state = initialState, action) {
+export default function conversionReducer(state = initialState, action) {
     switch (action.type) {
         case ENCODE_INPUT_REQUEST:
             return {
@@ -48,6 +55,18 @@ export default function encodeReducer(state = initialState, action) {
                 ...state,
                 isFetchingDecodeResult: false,
                 decodedValue: action.decodedValue
+            }
+
+        case SET_ENCODING_METHOD:
+            return {
+                ...state,
+                encodingMethod: action.encodingMethod
+            }
+
+        case SET_DECODING_METHOD:
+            return {
+                ...state,
+                decodingMethod: action.decodingMethod
             }
 
         default:

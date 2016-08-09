@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
-import * as encodeActions from '../../reducers/encode/encodeActions';
+import * as conversionActions from '../../reducers/conversion/conversionActions';
 import ConvertForm from './ConvertForm';
 import styleVariables from '../../lib/styleVariables.json';
 
@@ -18,6 +18,16 @@ class Home extends Component {
         dispatch(actions.decodeInput(rawText));
     }
 
+    onChangeEncodingMethod(encodingMethod) {
+        let {actions} = this.props;
+        actions.setEncodingMethod(encodingMethod);
+    }
+
+    onChangeDecodingMethod(decodingMethod) {
+        let {actions} = this.props;
+        actions.setDecodingMethod(decodingMethod);
+    }
+
     render() {
         let homeClass = classNames({
             'home-container': true,
@@ -28,9 +38,11 @@ class Home extends Component {
             <div>
                 <div className={homeClass}>
                     <ConvertForm convertType="encode"
+                                 conversionMethod={this.props.encodingMethod}
                                  convertedValue={this.props.encodedValue}
                                  isFetchingConvertResult={this.props.isFetchingEncodeResult}
                                  onConvertClick={(rawText) => this.onEncodeClick(rawText)}
+                                 onChangeConversionMethod={(encodingMethod) => this.onChangeEncodingMethod(encodingMethod)}
                                  buttonBackgroundColor={styleVariables.colors.themeBg}
                                  buttonLabelColor={styleVariables.colors.primaryBgText}
                                  textareaStyle={{color: 'black'}}
@@ -38,9 +50,11 @@ class Home extends Component {
                 </div>
                 <div className={homeClass} style={{backgroundColor: styleVariables.colors.themeBg}}>
                     <ConvertForm convertType="decode"
+                                 conversionMethod={this.props.decodingMethod}
                                  convertedValue={this.props.decodedValue}
                                  isFetchingConvertResult={this.props.isFetchingDecodeResult}
                                  onConvertClick={(rawText) => this.onDecodeClick(rawText)}
+                                 onChangeConversionMethod={(decodingMethod) => this.onChangeDecodingMethod(decodingMethod)}
                                  buttonBackgroundColor={styleVariables.colors.secondaryBgBtn}
                                  buttonLabelColor={styleVariables.colors.secondaryBgText}
                                  textareaStyle={{color: styleVariables.colors.primaryBgText}}
@@ -52,20 +66,24 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-    const {isFetchingEncodeResult, encodedValue, isFetchingDecodeResult, decodedValue} = state.encode;
+    const {encodingMethod, isFetchingEncodeResult, encodedValue, decodingMethod, isFetchingDecodeResult, decodedValue} = state.conversion;
     return {
+        encodingMethod,
         isFetchingEncodeResult,
         encodedValue,
+        decodingMethod,
         isFetchingDecodeResult,
         decodedValue
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    const {encodeInput, decodeInput} = encodeActions;
+    const {encodeInput, decodeInput, setEncodingMethod, setDecodingMethod} = conversionActions;
     const dispatchActions = bindActionCreators({
         encodeInput,
-        decodeInput
+        decodeInput,
+        setEncodingMethod,
+        setDecodingMethod
     }, dispatch);
     return {
         dispatch,
