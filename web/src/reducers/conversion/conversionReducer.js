@@ -1,72 +1,72 @@
 import {CONVERSION_METHODS} from '../../lib/constants';
 
 const {
-    ENCODE_INPUT_REQUEST,
-    ENCODE_INPUT_REQUEST_SUCCESS,
-    ENCODE_INPUT_REQUEST_FAILURE,
+    CONCEAL_INPUT_REQUEST,
+    CONCEAL_INPUT_REQUEST_SUCCESS,
+    CONCEAL_INPUT_REQUEST_FAILURE,
 
-    DECODE_INPUT_REQUEST,
-    DECODE_INPUT_REQUEST_SUCCESS,
-    DECODE_INPUT_REQUEST_FAILURE,
+    REVEAL_INPUT_REQUEST,
+    REVEAL_INPUT_REQUEST_SUCCESS,
+    REVEAL_INPUT_REQUEST_FAILURE,
 
-    SET_ENCODING_METHOD,
-    SET_DECODING_METHOD
+    SET_CONCEALING_METHOD,
+    SET_REVEALING_METHOD
 } = require('../../lib/actionKeys').default;
 
 const initialState = {
-    encodingMethod: CONVERSION_METHODS.BASE64,
-    isFetchingEncodeResult: false,
-    encodedValue: null,
-    decodingMethod: CONVERSION_METHODS.BASE64,
-    isFetchingDecodeResult: false,
-    decodedValue: null
+    concealingMethod: CONVERSION_METHODS.BASE64,
+    isFetchingConcealResult: false,
+    concealedValue: null,
+    revealingMethod: CONVERSION_METHODS.BASE64,
+    isFetchingRevealResult: false,
+    revealedValue: null
 };
 
 export default function conversionReducer(state = initialState, action) {
     switch (action.type) {
-        case ENCODE_INPUT_REQUEST:
+        case CONCEAL_INPUT_REQUEST:
             return {
                 ...state,
-                isFetchingEncodeResult: true
+                isFetchingConcealResult: true
             }
 
-        case ENCODE_INPUT_REQUEST_SUCCESS:
+        case CONCEAL_INPUT_REQUEST_SUCCESS:
             return {
                 ...state,
-                isFetchingEncodeResult: false,
-                encodedValue: action.encodedValue
+                isFetchingConcealResult: false,
+                concealedValue: action.concealedValue
             }
 
-        case ENCODE_INPUT_REQUEST_FAILURE:
+        case CONCEAL_INPUT_REQUEST_FAILURE:
             return {
                 ...state,
-                isFetchingEncodeResult: false
+                isFetchingConcealResult: false
             }
 
-        case DECODE_INPUT_REQUEST:
+        case REVEAL_INPUT_REQUEST:
             return {
                 ...state,
-                isFetchingDecodeResult: true
+                isFetchingRevealResult: true
             }
 
-        case DECODE_INPUT_REQUEST_FAILURE:
-        case DECODE_INPUT_REQUEST_SUCCESS:
+        case REVEAL_INPUT_REQUEST_FAILURE:
+        case REVEAL_INPUT_REQUEST_SUCCESS:
             return {
                 ...state,
-                isFetchingDecodeResult: false,
-                decodedValue: action.decodedValue
+                isFetchingRevealResult: false,
+                revealedValue: action.revealedValue
             }
 
-        case SET_ENCODING_METHOD:
+        case SET_CONCEALING_METHOD:
             return {
                 ...state,
-                encodingMethod: action.encodingMethod
+                concealingMethod: action.concealingMethod
             }
 
-        case SET_DECODING_METHOD:
+        case SET_REVEALING_METHOD:
             return {
                 ...state,
-                decodingMethod: action.decodingMethod
+                revealingMethod: action.revealingMethod
             }
 
         default:

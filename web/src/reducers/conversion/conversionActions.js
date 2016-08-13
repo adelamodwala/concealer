@@ -1,52 +1,52 @@
 import {postFetch} from '../../lib/api';
 
 const {
-    ENCODE_INPUT_REQUEST,
-    ENCODE_INPUT_REQUEST_SUCCESS,
-    ENCODE_INPUT_REQUEST_FAILURE,
+    CONCEAL_INPUT_REQUEST,
+    CONCEAL_INPUT_REQUEST_SUCCESS,
+    CONCEAL_INPUT_REQUEST_FAILURE,
 
-    DECODE_INPUT_REQUEST,
-    DECODE_INPUT_REQUEST_SUCCESS,
-    DECODE_INPUT_REQUEST_FAILURE,
+    REVEAL_INPUT_REQUEST,
+    REVEAL_INPUT_REQUEST_SUCCESS,
+    REVEAL_INPUT_REQUEST_FAILURE,
 
-    SET_ENCODING_METHOD,
-    SET_DECODING_METHOD
+    SET_CONCEALING_METHOD,
+    SET_REVEALING_METHOD
 } = require('../../lib/actionKeys').default;
 
 /**
- * Encode
+ * Conceal
  */
-export function encodeInputRequest() {
+export function concealInputRequest() {
     return {
-        type: ENCODE_INPUT_REQUEST
+        type: CONCEAL_INPUT_REQUEST
     }
 }
 
-export function encodeInputRequestSuccess(encodedValue) {
+export function concealInputRequestSuccess(concealedValue) {
     return {
-        type: ENCODE_INPUT_REQUEST_SUCCESS,
-        encodedValue
+        type: CONCEAL_INPUT_REQUEST_SUCCESS,
+        concealedValue
     }
 }
 
-export function encodeInputRequestFailure() {
+export function concealInputRequestFailure() {
     return {
-        type: ENCODE_INPUT_REQUEST_FAILURE
+        type: CONCEAL_INPUT_REQUEST_FAILURE
     }
 }
 
-export function encodeInput(rawText) {
+export function concealInput(rawText) {
     return (dispatch, getState) => {
-        dispatch(encodeInputRequest());
-        return sendEncodeInputRequest(rawText, getState().conversion.encodingMethod);
+        dispatch(concealInputRequest());
+        return sendConcealInputRequest(rawText, getState().conversion.concealingMethod);
     }
 }
 
-function sendEncodeInputRequest(rawText, encodingMethod) {
+function sendConcealInputRequest(rawText, concealingMethod) {
     return (dispatch) => {
         let opts = {
-            endpoint: '/encodeInput',
-            body: JSON.stringify({text: rawText, method: encodingMethod})
+            endpoint: '/concealInput',
+            body: JSON.stringify({text: rawText, method: concealingMethod})
         };
         
         return postFetch(opts)
@@ -56,56 +56,56 @@ function sendEncodeInputRequest(rawText, encodingMethod) {
                     json = response.json();
                 }
                 else {
-                    json = {"error": "Please enter a valid encoded value"}
+                    json = {"error": "Please enter a valid value for concealing"}
                 }
                 return json;
             })
             .then((json) => {
                 if(typeof json == "string") {
-                    dispatch(encodeInputRequestSuccess(json));
+                    dispatch(concealInputRequestSuccess(json));
                 }
                 else {
-                    dispatch(encodeInputRequestFailure());
+                    dispatch(concealInputRequestFailure());
                 }
             })
     }
 }
 
 /**
- * Decode
+ * Reveale
  */
-export function decodeInputRequest() {
+export function revealInputRequest() {
     return {
-        type: DECODE_INPUT_REQUEST
+        type: REVEAL_INPUT_REQUEST
     }
 }
 
-export function decodeInputRequestSuccess(decodedValue) {
+export function revealInputRequestSuccess(revealedValue) {
     return {
-        type: DECODE_INPUT_REQUEST_SUCCESS,
-        decodedValue
+        type: REVEAL_INPUT_REQUEST_SUCCESS,
+        revealedValue
     }
 }
 
-export function decodeInputRequestFailure(decodedValue) {
+export function revealInputRequestFailure(revealedValue) {
     return {
-        type: DECODE_INPUT_REQUEST_FAILURE,
-        decodedValue
+        type: REVEAL_INPUT_REQUEST_FAILURE,
+        revealedValue
     }
 }
 
-export function decodeInput(rawText) {
+export function revealInput(rawText) {
     return (dispatch, getState) => {
-        dispatch(decodeInputRequest());
-        return sendDecodeInputRequest(rawText, getState().conversion.decodingMethod);
+        dispatch(revealInputRequest());
+        return sendRevealInputRequest(rawText, getState().conversion.revealingMethod);
     }
 }
 
-function sendDecodeInputRequest(rawText, decodingMethod) {
+function sendRevealInputRequest(rawText, revealingMethod) {
     return (dispatch) => {
         let opts = {
-            endpoint: '/decodeInput',
-            body: JSON.stringify({text: rawText, method: decodingMethod})
+            endpoint: '/revealInput',
+            body: JSON.stringify({text: rawText, method: revealingMethod})
         };
 
         return postFetch(opts)
@@ -115,16 +115,16 @@ function sendDecodeInputRequest(rawText, decodingMethod) {
                     json = response.json();
                 }
                 else {
-                    json = {"error": "Please enter a valid encoded value"}
+                    json = {"error": "Please enter a valid concealed value"}
                 }
                 return json;
             })
             .then((json) => {
                 if(typeof json == "string") {
-                    dispatch(decodeInputRequestSuccess(json));
+                    dispatch(revealInputRequestSuccess(json));
                 }
                 else {
-                    dispatch(decodeInputRequestFailure(json.error));
+                    dispatch(revealInputRequestFailure(json.error));
                 }
             })
     }
@@ -133,16 +133,16 @@ function sendDecodeInputRequest(rawText, decodingMethod) {
 /**
  * Conversion method changes
  */
-export function setEncodingMethod(encodingMethod) {
+export function setConcealingMethod(concealingMethod) {
     return {
-        type: SET_ENCODING_METHOD,
-        encodingMethod
+        type: SET_CONCEALING_METHOD,
+        concealingMethod
     }
 }
 
-export function setDecodingMethod(decodingMethod) {
+export function setRevealingMethod(revealingMethod) {
     return {
-        type: SET_DECODING_METHOD,
-        decodingMethod
+        type: SET_REVEALING_METHOD,
+        revealingMethod
     }
 }

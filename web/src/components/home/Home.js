@@ -8,24 +8,24 @@ import styleVariables from '../../lib/styleVariables.json';
 
 class Home extends Component {
 
-    onEncodeClick(rawText) {
+    onConcealClick(rawText) {
         let {dispatch, actions} = this.props;
-        dispatch(actions.encodeInput(rawText));
+        dispatch(actions.concealInput(rawText));
     }
 
-    onDecodeClick(rawText) {
+    onRevealClick(rawText) {
         let {dispatch, actions} = this.props;
-        dispatch(actions.decodeInput(rawText));
+        dispatch(actions.revealInput(rawText));
     }
 
-    onChangeEncodingMethod(encodingMethod) {
+    onChangeConcealingMethod(concealingMethod) {
         let {actions} = this.props;
-        actions.setEncodingMethod(encodingMethod);
+        actions.setConcealingMethod(concealingMethod);
     }
 
-    onChangeDecodingMethod(decodingMethod) {
+    onChangeRevealingMethod(revealingMethod) {
         let {actions} = this.props;
-        actions.setDecodingMethod(decodingMethod);
+        actions.setRevealingMethod(revealingMethod);
     }
 
     render() {
@@ -37,24 +37,24 @@ class Home extends Component {
         return (
             <div>
                 <div className={homeClass}>
-                    <ConvertForm convertType="encode"
-                                 conversionMethod={this.props.encodingMethod}
-                                 convertedValue={this.props.encodedValue}
-                                 isFetchingConvertResult={this.props.isFetchingEncodeResult}
-                                 onConvertClick={(rawText) => this.onEncodeClick(rawText)}
-                                 onChangeConversionMethod={(encodingMethod) => this.onChangeEncodingMethod(encodingMethod)}
+                    <ConvertForm convertType="conceal"
+                                 conversionMethod={this.props.concealingMethod}
+                                 convertedValue={this.props.concealedValue}
+                                 isFetchingConvertResult={this.props.isFetchingConcealResult}
+                                 onConvertClick={(rawText) => this.onConcealClick(rawText)}
+                                 onChangeConversionMethod={(concealingMethod) => this.onChangeConcealingMethod(concealingMethod)}
                                  buttonBackgroundColor={styleVariables.colors.themeBg}
                                  buttonLabelColor={styleVariables.colors.primaryBgText}
                                  textareaStyle={{color: 'black'}}
                                  resultStyle={{color: styleVariables.colors.secondaryBgText}}/>
                 </div>
                 <div className={homeClass} style={{backgroundColor: styleVariables.colors.themeBg}}>
-                    <ConvertForm convertType="decode"
-                                 conversionMethod={this.props.decodingMethod}
-                                 convertedValue={this.props.decodedValue}
-                                 isFetchingConvertResult={this.props.isFetchingDecodeResult}
-                                 onConvertClick={(rawText) => this.onDecodeClick(rawText)}
-                                 onChangeConversionMethod={(decodingMethod) => this.onChangeDecodingMethod(decodingMethod)}
+                    <ConvertForm convertType="reveal"
+                                 conversionMethod={this.props.revealingMethod}
+                                 convertedValue={this.props.revealedValue}
+                                 isFetchingConvertResult={this.props.isFetchingRevealResult}
+                                 onConvertClick={(rawText) => this.onRevealClick(rawText)}
+                                 onChangeConversionMethod={(revealingMethod) => this.onChangeRevealingMethod(revealingMethod)}
                                  buttonBackgroundColor={styleVariables.colors.secondaryBgBtn}
                                  buttonLabelColor={styleVariables.colors.secondaryBgText}
                                  textareaStyle={{color: styleVariables.colors.primaryBgText}}
@@ -66,24 +66,24 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-    const {encodingMethod, isFetchingEncodeResult, encodedValue, decodingMethod, isFetchingDecodeResult, decodedValue} = state.conversion;
+    const {concealingMethod, isFetchingConcealResult, concealedValue, revealingMethod, isFetchingRevealResult, revealedValue} = state.conversion;
     return {
-        encodingMethod,
-        isFetchingEncodeResult,
-        encodedValue,
-        decodingMethod,
-        isFetchingDecodeResult,
-        decodedValue
+        concealingMethod,
+        isFetchingConcealResult,
+        concealedValue,
+        revealingMethod,
+        isFetchingRevealResult,
+        revealedValue
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    const {encodeInput, decodeInput, setEncodingMethod, setDecodingMethod} = conversionActions;
+    const {concealInput, revealInput, setConcealingMethod, setRevealingMethod} = conversionActions;
     const dispatchActions = bindActionCreators({
-        encodeInput,
-        decodeInput,
-        setEncodingMethod,
-        setDecodingMethod
+        concealInput,
+        revealInput,
+        setConcealingMethod,
+        setRevealingMethod
     }, dispatch);
     return {
         dispatch,
