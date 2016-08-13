@@ -1,24 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const CryptoJS = require("crypto-js");
+import ConversionService from '../service/ConversionService';
+
+const conversionService = new ConversionService();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Expression Nagga' });
+  res.render('index', { title: 'Concealer' });
 });
 
-router.post('/encodeInput', (req, res) => {
+router.post('/concealInput', (req, res) => {
   let method = req.body.method;
-  let wordArray = CryptoJS.enc.Utf8.parse(req.body.text);
-  let encoded = CryptoJS.enc.Base64.stringify(wordArray);
-  res.send(JSON.stringify(encoded));
+
+  let concealed = conversionService.concealInput(req.body.text);
+
+  res.json(concealed);
 });
 
-router.post('/decodeInput', (req, res) => {
+router.post('/revealInput', (req, res) => {
   let method = req.body.method;
-  let wordArray = CryptoJS.enc.Base64.parse(req.body.text);
-  let decoded = CryptoJS.enc.Utf8.stringify(wordArray);
-  res.send(JSON.stringify(decoded));
+
+  let revealed = conversionService.revealInput(req.body.text);
+
+  res.json(revealed);
 });
 
 module.exports = router;
