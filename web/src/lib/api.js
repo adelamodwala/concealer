@@ -1,11 +1,8 @@
 let apiAddress;
 if (process.env.NODE_ENV === 'production') {
-    // apiAddress = 'https://spenderservice.adelamodwala.com';
-    apiAddress = 'http://localhost:9050';
+    apiAddress = '';
 }
 else {
-    // apiAddress = 'https://spenderservice.adelamodwala.com';
-    // apiAddress = 'http://192.168.1.7:9000/spender';
     apiAddress = 'http://localhost:9050';
 }
 
