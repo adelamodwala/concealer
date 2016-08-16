@@ -5,12 +5,13 @@ import classNames from 'classnames';
 import * as conversionActions from '../../reducers/conversion/conversionActions';
 import ConvertForm from './ConvertForm';
 import styleVariables from '../../lib/styleVariables.json';
+import {CONCEAL_METHODS, REVEAL_METHODS} from '../../lib/constants';
 
 class Home extends Component {
 
-    onConcealClick(rawText) {
+    onConcealClick(rawText, secretKey) {
         let {dispatch, actions} = this.props;
-        dispatch(actions.concealInput(rawText));
+        dispatch(actions.concealInput(rawText, secretKey));
     }
 
     onRevealClick(rawText) {
@@ -40,8 +41,10 @@ class Home extends Component {
                     <ConvertForm convertType="conceal"
                                  conversionMethod={this.props.concealingMethod}
                                  convertedValue={this.props.concealedValue}
+                                 availableConversionMethods={CONCEAL_METHODS}
                                  isFetchingConvertResult={this.props.isFetchingConcealResult}
-                                 onConvertClick={(rawText) => this.onConcealClick(rawText)}
+                                 showSecretKeyInput={this.props.concealingMethod == CONCEAL_METHODS.AES}
+                                 onConvertClick={(rawText, secretKey) => this.onConcealClick(rawText, secretKey)}
                                  onChangeConversionMethod={(concealingMethod) => this.onChangeConcealingMethod(concealingMethod)}
                                  buttonBackgroundColor={styleVariables.colors.themeBg}
                                  buttonLabelColor={styleVariables.colors.primaryBgText}
@@ -52,6 +55,7 @@ class Home extends Component {
                     <ConvertForm convertType="reveal"
                                  conversionMethod={this.props.revealingMethod}
                                  convertedValue={this.props.revealedValue}
+                                 availableConversionMethods={REVEAL_METHODS}
                                  isFetchingConvertResult={this.props.isFetchingRevealResult}
                                  onConvertClick={(rawText) => this.onRevealClick(rawText)}
                                  onChangeConversionMethod={(revealingMethod) => this.onChangeRevealingMethod(revealingMethod)}

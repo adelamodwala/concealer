@@ -6,18 +6,29 @@ import TextField from 'material-ui/TextField';
 import SnailLoader from '../common/SnailLoader';
 import styleVariables from '../../lib/styleVariables.json';
 import {capitalizeFirstLetter} from '../../lib/convert';
-import {CONVERSION_METHODS} from '../../lib/constants';
 
 export default class ConvertForm extends Component {
 
     onConvertClick() {
         let rawText = this.refs[this.props.convertType + "Text"].getValue();
-        this.props.onConvertClick(rawText);
+        let secretKey = this.refs[this.props.convertType + "SecretKey"] ? this.refs[this.props.convertType + "SecretKey"].getValue() : "";
+        this.props.onConvertClick(rawText, secretKey);
     }
 
     onChangeConversionMethod(value) {
         console.log(value);
         this.props.onChangeConversionMethod(value);
+    }
+
+    getConversionMethods() {
+        let conversionMethods = this.props.availableConversionMethods;
+        let renderOptions = [];
+        Object.keys(conversionMethods).map((method, idx) => {
+            renderOptions.push(
+                <MenuItem key={idx} value={conversionMethods[method]} primaryText={conversionMethods[method]}/>
+            );
+        });
+        return renderOptions;
     }
 
     render() {
@@ -34,6 +45,15 @@ export default class ConvertForm extends Component {
                         textareaStyle={this.props.textareaStyle}
                         multiLine={true}
                         fullWidth={true}/>
+                    {this.props.showSecretKeyInput ?
+                        <TextField
+                            ref={this.props.convertType + "SecretKey"}
+                            floatingLabelText={"Secret key..."}
+                            floatingLabelFocusStyle={{color: styleVariables.colors.floater}}
+                            underlineFocusStyle={{borderColor: styleVariables.colors.floater}}
+                            textareaStyle={this.props.textareaStyle}
+                            fullWidth={true}/> : null
+                    }
                 </div>
 
                 <div style={{display: 'flex', flex: 1, flexDirection: 'row', justifyContent: 'flex-start'}}>
@@ -53,10 +73,7 @@ export default class ConvertForm extends Component {
                                       onChange={(event, index, value) => this.onChangeConversionMethod(value)}
                                       labelStyle={{color: styleVariables.colors.floater}}
                                       underlineStyle={{borderColor: styleVariables.colors.floater}}>
-                            <MenuItem value={CONVERSION_METHODS.BASE64} primaryText={CONVERSION_METHODS.BASE64}/>
-                            <MenuItem value={CONVERSION_METHODS.MD5} primaryText={CONVERSION_METHODS.MD5}/>
-                            <MenuItem value={CONVERSION_METHODS.SHA256} primaryText={CONVERSION_METHODS.SHA256}/>
-                            <MenuItem value={CONVERSION_METHODS.AES} primaryText={CONVERSION_METHODS.AES}/>
+                            {this.getConversionMethods()}
                         </DropDownMenu>
                     </div>
                 </div>

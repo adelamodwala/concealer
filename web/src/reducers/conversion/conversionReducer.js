@@ -1,4 +1,4 @@
-import {CONVERSION_METHODS} from '../../lib/constants';
+import {CONCEAL_METHODS} from '../../lib/constants';
 
 const {
     CONCEAL_INPUT_REQUEST,
@@ -14,10 +14,10 @@ const {
 } = require('../../lib/actionKeys').default;
 
 const initialState = {
-    concealingMethod: CONVERSION_METHODS.BASE64,
+    concealingMethod: CONCEAL_METHODS.BASE64,
     isFetchingConcealResult: false,
     concealedValue: null,
-    revealingMethod: CONVERSION_METHODS.BASE64,
+    revealingMethod: CONCEAL_METHODS.BASE64,
     isFetchingRevealResult: false,
     revealedValue: null
 };

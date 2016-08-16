@@ -35,18 +35,18 @@ export function concealInputRequestFailure() {
     }
 }
 
-export function concealInput(rawText) {
+export function concealInput(rawText, secretKey) {
     return (dispatch, getState) => {
         dispatch(concealInputRequest());
-        return sendConcealInputRequest(rawText, getState().conversion.concealingMethod);
+        return sendConcealInputRequest(rawText, secretKey, getState().conversion.concealingMethod);
     }
 }
 
-function sendConcealInputRequest(rawText, concealingMethod) {
+function sendConcealInputRequest(rawText, secretKey, concealingMethod) {
     return (dispatch) => {
         let opts = {
             endpoint: '/concealInput',
-            body: JSON.stringify({text: rawText, method: concealingMethod})
+            body: JSON.stringify({text: rawText, secretKey: secretKey, method: concealingMethod})
         };
         
         return postFetch(opts)
@@ -56,6 +56,7 @@ function sendConcealInputRequest(rawText, concealingMethod) {
                     json = response.json();
                 }
                 else {
+                    console.log(response);
                     json = {"error": "Please enter a valid value for concealing"}
                 }
                 return json;
@@ -65,6 +66,7 @@ function sendConcealInputRequest(rawText, concealingMethod) {
                     dispatch(concealInputRequestSuccess(json));
                 }
                 else {
+                    console.log(json);
                     dispatch(concealInputRequestFailure());
                 }
             })
