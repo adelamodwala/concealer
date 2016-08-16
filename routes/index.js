@@ -10,10 +10,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/concealInput', (req, res) => {
-  let method = req.body.method;
-
-  let concealed = conversionService.concealInput(req.body.text);
-
+  let concealed = conversionService.concealInput(req.body.text, req.body.secretKey, req.body.method);
   res.json(concealed);
 });
 
